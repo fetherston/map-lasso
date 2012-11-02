@@ -6,7 +6,7 @@
  * Requires: jQuery > v1.4
  * Author: Chris Fetherston cfetherston.com
  * Copyright: Copyright 2012 Chris Fetherston
- * License: LICENSE_INFO
+ * License: MIT and GPL
  */
 (function($){
   $.mapLasso = function(el, options){
