@@ -129,6 +129,7 @@
       // end the lasso
       google.maps.event.addListenerOnce(base.options.map, 'mouseup', function(event) {
         var length = lassoLatLong.length;
+        console.log(length);
       
         // if there's a reasonable amount
         if (length < base.options.maxMarkers && length > base.options.minMarkers) {
@@ -148,6 +149,7 @@
           
           // dump unfiltered latlong
           lassoLatLong = [];
+          console.log(output.length);
           lassoLatLong = output;            
           base.endLasso();   
         }
@@ -218,11 +220,6 @@
     /* ---------------------------------------------------
     * end public methods
     * ---------------------------------------------------*/
-    
-    // Sample Function, Uncomment to use
-    // base.functionName = function(paramaters){
-    // 
-    // };
     
     // Run initializer
     base.init();
