@@ -129,17 +129,16 @@
       // end the lasso
       google.maps.event.addListenerOnce(base.options.map, 'mouseup', function(event) {
         var length = lassoLatLong.length;
-        console.log(length);
       
         // if there's a reasonable amount
-        if (length < base.options.maxMarkers && length > base.options.minMarkers) {
+        if (length < base.options.maxPoints && length > base.options.minPoints) {
           base.endLasso(); // do nothing, end lasso
         } 
 
         // if there's too many, thin down
-        else if (length > base.options.minMarkers) {
+        else if (length > base.options.minPoints) {
         
-          var factor = parseInt((length / base.options.maxMarkers)+1);               
+          var factor = parseInt((length / base.options.maxPoints)+1);               
           var output = [];
           var i = 0;
           
@@ -233,8 +232,8 @@
     strokeOpacity: 0.75,
     fillColor: '#FF0000',
     fillOpacity: 0.15,
-    maxMarkers: 175, // tolerance for # of markers 
-    minMarkers: 10 // minimum # of markers to start search  
+    maxPoints: 175, // tolerance for # of markers 
+    minPoints: 10 // minimum # of markers to start search  
   };
   
   $.fn.mapLasso = function(options){
