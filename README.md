@@ -80,8 +80,8 @@ $('.get-coords').click(function(event) {
 });
 ```
 
-### getCoords()
-Returns the coordinates of the lasso tool as an array of Google Maps latlng objects.
+### getCoords({options})
+Returns the coordinates of the lasso tool as an array of Google Maps LatLng objects (see [Google's docs](https://developers.google.com/maps/documentation/javascript/reference#LatLng_)). Optionally pass an options object to customize the response. Currently the only option is "type: array" to return the response as an array of latitude and longitude coordinates.
 
 ### clearLasso()
 Clears the lasso from the map.
@@ -90,6 +90,19 @@ Clears the lasso from the map.
 
 
 ## Events 
+Events are defined as functions when the plugin is started. Example:
+```js
+$('#map').mapLasso({
+    onStart: function(event){
+    	alert('Started here: ' + event.latLng.toString());
+	}
+};
+```
+### onStart
+Fires when the user starts creating the lasso. The [Google Maps click event](https://developers.google.com/maps/documentation/javascript/events) object is available for use in this event.
+
+### onEnd
+Fires when the user ends the lasso. The [Google Maps click event](https://developers.google.com/maps/documentation/javascript/events) object is available for use in this event.
 
 
 

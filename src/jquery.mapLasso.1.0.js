@@ -28,7 +28,7 @@
    /* ---------------------------------------------------
     * Start private methods
     * ---------------------------------------------------*/
-    var startLassoHandler = function(event) {
+    var startLassoHandler = function() {
       event.preventDefault();
       base.startLasso(event);
     };
@@ -61,7 +61,7 @@
       initHandlers();
     };
 
-    base.startLasso = function(startHere) {
+    base.startLasso = function() {
       base.clearLasso();
       // create a polyline path to follow the cursor
       var lassoPathOptions = {
@@ -79,6 +79,7 @@
         draggable: false
       }); 
 
+      // assign a handler to cancel the lasso on keyup
       $('body').keyup(lassoEscHandler).css('cursor', 'crosshair');
 
       google.maps.event.addListenerOnce(base.options.map, 'mousedown', function(event) {                    
@@ -86,13 +87,17 @@
         // variables used for panning the map       
         var panTolerance = 40; // tolerance from edge of container in pixels
         var panSpeed = 5; // distance to pan in pixels
-        var container = base.$el;
-        var containerOffset = container.offset();
-        var rightExit = container.innerWidth();
-        var bottomExit = container.height();  
+        var containerOffset = base.$el.offset();
+        var rightExit = base.$el.innerWidth();
+        var bottomExit = base.$el.height();  
         var panning = false;      
         
-        var path = lassoPath.getPath();           
+        var path = lassoPath.getPath();
+
+        // fire the onStart event if provided 
+        if (base.options.onStart !== null) {
+          base.options.onStart(event);
+        }           
         
         // start tracking cursor 
         google.maps.event.addListener(base.options.map, 'mousemove', function(event) {
@@ -112,10 +117,7 @@
           else if (event.pixel.y <= panTolerance) {
             base.options.map.panBy(0, -panSpeed);
           }
-          
-          else {
-            panning = false;
-          }
+
           var cursorPosition = new google.maps.LatLng(event.latLng.lat(), event.latLng.lng());
 
           // add marker position to lassoLatLong array
@@ -156,6 +158,11 @@
         else {
           base.clearLasso();
         }
+
+        // fire the onEnd event if specified
+        if (base.options.onEnd !== null) {
+          base.options.onEnd(event);
+        }      
       }); 
     };
 
@@ -211,9 +218,29 @@
       lassoLatLong = [];
     }; 
 
-    base.getCoords = function() {
-      /* Returns the lasso coords as google latlng objects */
-      return lassoLatLong;
+    base.getCoords = function(options) {
+     /* Returns the lasso coords as google latlng objects 
+      * @param options: object, options for return response
+      */
+
+      var settings = {
+        type: 'latLng'
+      };
+      var coords = lassoLatLong;
+
+      $.extend(settings, options);
+
+      if (settings.type === 'array') {
+        var coords = [];
+        $.each(lassoLatLong, function(i, val) {
+          coords.push({
+            lat: val.lat(),
+            lng: val.lng()
+          });
+        });
+      }
+
+      return coords;
     };
 
     /* ---------------------------------------------------
@@ -226,6 +253,8 @@
   
   $.mapLasso.defaultOptions = {
     startElem: $('a.start-lasso'),
+    onStart: null,
+    onEnd: null,
     map: null,
     strokeWeight: 3,
     strokeColor: '#FF0000',
