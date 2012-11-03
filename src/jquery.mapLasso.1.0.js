@@ -28,7 +28,7 @@
    /* ---------------------------------------------------
     * Start private methods
     * ---------------------------------------------------*/
-    var startLassoHandler = function() {
+    var startLassoHandler = function(event) {
       event.preventDefault();
       base.startLasso(event);
     };
@@ -40,7 +40,7 @@
     };
 
     var initHandlers = function() {
-      base.options.startElem.click(startLassoHandler);
+      base.options.startElem.on('click', startLassoHandler);
     };
 
     /* ---------------------------------------------------
