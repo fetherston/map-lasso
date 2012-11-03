@@ -40,7 +40,7 @@
     };
 
     var initHandlers = function() {
-      base.options.startElem.on('click', startLassoHandler);
+      $(base.options.startElem).on('click', startLassoHandler);
     };
 
     /* ---------------------------------------------------
@@ -252,7 +252,7 @@
   };
   
   $.mapLasso.defaultOptions = {
-    startElem: $('a.start-lasso'),
+    startElem: 'a.start-lasso',
     onStart: null,
     onEnd: null,
     map: null,

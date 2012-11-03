@@ -41,8 +41,8 @@ $('#map').mapLasso({
 };
 ```
 
-### startElem (jQuery selector, default: $('a.start-lasso'))
-jQuery Selector: A DOM element that will start the lasso tool on click.
+### startElem (string, default: $('a.start-lasso'))
+The class or id to attach the start lasso event handler to, example: 'a.start-lasso, #start-lasso etc'.
 
 ### strokeWeight (number, default: 3)
 Width in pixels of the lasso stroke.
