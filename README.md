@@ -11,7 +11,8 @@ A plugin for Google Maps for drawing shapes with the mouse or touch device. Once
 Follow Google's hello world example to create a Google Maps instance. Insure that the Google Maps object is available in the same scope as where the plugin will be started.
 
 ### 2) Include jQuery and the Map Lasso plugin file
-Map Lasso is compatible with jQuery versions greater than 1.4 
+Map Lasso is compatible with jQuery versions greater than 1.4.
+
 ```html
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
 <script src="jquery.mapLasso.1.0.js" type="text/javascript"></script>
@@ -19,6 +20,7 @@ Map Lasso is compatible with jQuery versions greater than 1.4
 
 ### 3) Start the Plugin
 Attach the plugin to the DOM element that contains the map. Pass the Google Maps object to the plugin as the map parameter. This is the only required parameter.
+
 ```js
 $('#map').mapLasso({
 	map: map
@@ -32,6 +34,7 @@ $('#map').mapLasso({
 The following configuration options are available in the Map Lasso plugin and are defined in the configuration object.
 
 ### Example
+
 ```js
 $('#map').mapLasso({
     startElem: $('a.start-lasso'),
@@ -74,6 +77,7 @@ The Google Maps object. See Google Maps API for more information.
 The following public methods are available and are accessed via the jQuery data object of the element the plugin was assigned to.
 
 ### Example
+
 ```js
 $('.get-coords').click(function(event) {
 	console.log($('#map').data('mapLasso').getCoords());
@@ -91,6 +95,7 @@ Clears the lasso from the map.
 
 ## Events 
 Events are defined as functions when the plugin is started. Example:
+
 ```js
 $('#map').mapLasso({
     onStart: function(event){
@@ -103,7 +108,6 @@ Fires when the user starts creating the lasso. The [Google Maps click event](htt
 
 ### onEnd
 Fires when the user ends the lasso. The [Google Maps click event](https://developers.google.com/maps/documentation/javascript/events) object is available for use in this event.
-
 
 
 
