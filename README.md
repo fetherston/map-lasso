@@ -25,7 +25,6 @@ Attach the plugin to the DOM element that contains the map. Pass the Google Maps
 $('#map').mapLasso({
 	map: map
 });
-
 ```
 
 
